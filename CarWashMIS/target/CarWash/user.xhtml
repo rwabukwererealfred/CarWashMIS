@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+    <h:form id="form">
+    <p:messages showDetail="true" autoUpdate="true" closable="true"/>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h1>Users</h1>
+                     <p:dataTable var="iki" value="#{listController.userList}"
+									
+									style="margin-top:20px;" paginator="true" rows="10">
+
+									<p:column style="width:30px;" headerText="No">
+										#{i=i+1}
+									</p:column>
+									<p:column headerText="First Name">
+									#{iki.firstName}
+							</p:column>
+									<p:column headerText="Last Name">
+									#{iki.lastName}
+							</p:column>
+									<p:column headerText="Phone Number">
+									#{iki.phoneNumber}
+							</p:column>
+							
+									<p:column headerText="Role">
+									#{iki.role}
+							</p:column>
+							
+									<p:column headerText="Car Wash Name">
+									#{iki.ikinamba.name}
+							</p:column>
+							
+									<p:column headerText="Option">
+									<center>
+										<p:commandButton icon="fa fa-pencil" oncomplete="PF('adminDialog').show()" action="#{updateController.userDialog(iki)}"
+										update="@widgetVar(adminDialog)"/>
+										<p:commandButton icon="fa fa-trash" styleClass="pink-btn flat"/>
+									</center>
+							</p:column>
+									
+								</p:dataTable>
+                </div>
+            </div>
+        </div>
+      </h:form>
+      <h:form>
+      <p:dialog widgetVar="adminDialog" showEffect="clip" hideEffect="clip"
+				closable="true" closeOnEscape="true" modal="true">
+				
+				<p:panel>
+
+					<p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank form-group" style="padding:20px;">
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{updateController.user.firstName}"
+								style="width:95%;" />
+							<label>firstname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{updateController.user.lastName}"
+								style="width:95%;" />
+							<label>lastname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield" style="margin-top:10px;">
+							<p:inputMask mask="999 9999 999" value="#{updateController.user.phoneNumber}"
+								style="width:95%;" />
+							<label>phone number</label>
+						</h:panelGroup>
+						<p:selectOneMenu value="#{updateController.user.role}"
+									id="distr">
+									<f:selectItem itemLabel="Choose user role"
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="Admin" itemValue="Admin" />
+									<f:selectItem itemLabel="Cashier" itemValue="Cashier" />
+						</p:selectOneMenu>
+						
+					</p:panelGrid>
+					<f:facet name="footer">
+						
+							
+							<p:commandButton value="save" action="#{updateController.userUpdate()}" icon="fa fa-save" 
+							 update="form" oncomplete="PF('adminDialog').hide()"/>
+					</f:facet>
+				</p:panel>
+			</p:dialog>
+      </h:form> 
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,77 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+    
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">
+                            <div class="profile-image"></div>
+                            <a id="profile-options" href="#">
+                                <span class="profile-name">Jane Williams</span>
+                                <i class="material-icons">&#xE313;</i>
+                            </a>
+                        </div>
+                    
+                        <ul id="profile-menu" class="ultima-menu">
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE7FD;</i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE32A;</i>
+                                    <span>Privacy</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE8B9;</i>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE8AC;</i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ui:fragment>
+                    <h:panelGroup rendered="#{authenticationController.user.role =='Admin'}">
+                    <pu:menu widgetVar="me">
+                        <p:menuitem value="Worker" icon="fa fa-user-plus" action="#{authenticationController.wokerPage()}"/>
+                      	<p:menuitem value="Vehicle" icon="fa fa-cab"  action="#{authenticationController.vehiclePage()}"/>
+                      	<p:menuitem value="Services" icon="fa fa-list" outcome="/ServiceListForm" />
+                      	<p:menuitem value="Cashier" icon="fa fa-user" action="#{authenticationController.cashierPage()}"/>
+                    </pu:menu>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{authenticationController.user.role =='Cashier'}">
+                    <pu:menu widgetVar="me">
+                        <p:menuitem value="Worker" icon="fa fa-user-plus" action="#{authenticationController.wokerPage()}"/>
+                      	<p:menuitem value="Vehicle" icon="fa fa-cab" action="#{authenticationController.vehiclePage()}"/>
+                      	<p:menuitem value="Services" icon="fa fa-list" outcome="/ServiceListForm" />
+                      	<p:menuitem value="Payment" icon="fa fa-sitemap" action="#{authenticationController.paymentPage()}" />
+                      	
+                    </pu:menu>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{authenticationController.username =='admin'}">
+                    <pu:menu widgetVar="me">
+                    <p:menuitem value="Car Wash" icon="fa fa-user-md"  action="#{authenticationController.carWashPage()}"/>
+                    <p:menuitem value="Users" icon="fa fa-user" action="#{authenticationController.userPage()}"/>
+                    </pu:menu>
+                    </h:panelGroup>
+                    
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

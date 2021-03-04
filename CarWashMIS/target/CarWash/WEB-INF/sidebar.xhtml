@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pu="http://primefaces.org/ultima">
+
+
+	<p:panel toggleable="true"
+		style="top:148px;position:sticky;">
+		<h:form id="menuform_">
+			<p:growl showDetail="true" />
+			<div class="nano">
+				<div class="nano-content menu-scroll-content">
+				<h:panelGroup rendered="#{authenticationController.pages =='workerPage'}">
+					<pu:menu widgetVar="me">
+						<p:menuitem  value="Workers" icon="&#xE871;"
+							outcome="/Worker"/>
+						<p:menuitem  value="Work Group" icon="&#xE871;"
+							outcome="/WorkerGroup"/>
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='vehiclePage' and authenticationController.user.role == 'Admin'}">
+					<pu:menu widgetVar="me">
+						<p:menuitem  value="Vehicle Registration" icon="&#xE871;"
+							outcome="/VehicleRegistration"/>
+						<p:menuitem  value="Vehicle List" icon="&#xE871;"
+							outcome="/VehicleList"/>
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='vehiclePage' and authenticationController.user.role == 'Cashier'}">
+					<pu:menu widgetVar="me">
+						
+						<p:menuitem  value="Vehicle List" icon="&#xE871;"
+							outcome="/VehicleList"/>
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='carWash'}">
+					<pu:menu widgetVar="me">
+						<p:menuitem  value="Car Wash" icon="&#xE871;"
+							outcome="/IkinambaRegistration"/>
+						
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='cashierPage'}">
+					<pu:menu widgetVar="me">
+					
+						<p:menuitem  value="Cashier Registration" icon="&#xE871;"
+							outcome="/CashierRegistration"/>
+							<p:menuitem  value="Cashier List" outcome="/CashierList" icon="&#xE871;"
+							/>
+						
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='paymentPage'}">
+					<pu:menu widgetVar="me">
+					
+						<p:menuitem  value="Payment details" icon="&#xE871;"
+							outcome="/Payment"/>
+							
+						
+					</pu:menu>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{authenticationController.pages =='userPage'}">
+					<pu:menu widgetVar="me">
+					
+						<p:menuitem  value="Users" icon="&#xE871;"
+							outcome="/user"/>
+							
+						
+					</pu:menu>
+				</h:panelGroup>
+				</div>
+			</div>
+		</h:form>
+	</p:panel>
+	
+	
+	
+</ui:composition>

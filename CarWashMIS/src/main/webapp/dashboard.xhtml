@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Dashboard</ui:define>
+
+	<ui:define name="head">
+
+		<script type="text/javascript">
+               //<![CDATA[
+               function skinChart() {
+                   this.cfg.shadow = false;
+                   this.cfg.title = '';
+                   this.cfg.seriesColors = ['#FFC107', '#03A9F4'];
+                   this.cfg.grid = {
+                       background: '#ffffff',
+                       borderColor: '#ffffff',
+                       gridLineColor: '#EEEEEE',
+                       shadow: false
+                   };
+                   this.cfg.axesDefaults = {
+                       rendererOptions: {
+                           textColor: '#212121'
+                       }
+                   };
+                   this.cfg.seriesDefaults = {
+                       shadow: false,
+                       lineWidth: 1,
+                       markerOptions: {
+                           shadow: false,
+                           size: 7,
+                           style: 'circle'
+                       }
+                   }
+               }
+               //]]>  
+           </script>
+		<style type="text/css">
+.main-content {
+	padding: 0;
+}
+
+.meeting-datalist .text-column p:last-child {
+	color: #757575;
+}
+
+.meeting-datalist .meeting-item i, .meeting-datalist .meeting-item .meeting-details
+	{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.meeting-datalist .meeting-item button {
+	float: right;
+}
+
+.meeting-datalist ul {
+	margin: 0;
+	padding: 0;
+}
+
+.ui-meeting-display td:last-child {
+	font-weight: 700;
+}
+
+@media ( max-width :640px) {
+	.meeting-datalist .text-column {
+		text-align: center;
+	}
+}
+</style>
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="card">
+			<h:form id="form">
+
+				<div class="ui-g dashboard">
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-2">
+							<div class="ui-g-4">
+								<i class="fa fa-user" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Patients</span> <span
+									class="colorbox-count">6</span>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-1">
+							<div class="ui-g-4">
+								<i class="fa fa-user-md" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Doctors</span> <span
+									class="colorbox-count">10</span>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-4">
+							<div class="ui-g-4">
+								<i class="fa fa-copy" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Results</span> <span
+									class="colorbox-count">15</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-2">
+							<div class="ui-g-4">
+								<i class="fa fa-tags" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Appointments</span> <span
+									class="colorbox-count">20</span>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-3">
+							<div class="ui-g-4">
+								<i class="fa fa-spinner" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Pending Appointment</span> <span
+									class="colorbox-count">10</span>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-4">
+						<div class="ui-g card colorbox colorbox-2">
+							<div class="ui-g-4">
+								<i class="fa fa-thumbs-up" style="font-size: 40px;" />
+							</div>
+							<div class="ui-g-8">
+								<span class="colorbox-name">Finished Appointment</span> <span
+									class="colorbox-count">4</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-g-12">
+						<div class="ui-g-12 ui-md-12">
+							<p:fieldset legend="MOST REPORTED DISEASE" style="margin-top:50px;">
+<!-- 								<p:repeat var="dis" value="#{dashboard.diseasefreue()}"> -->
+<!-- 									<h4><b>#{dis.value.name}</b></h4> -->
+<!-- 									<p:progressBar value="#{dis.key}" labelTemplate="{value}%" -->
+<!-- 										displayOnly="true" style="color:black;"/> -->
+<!-- 										<br/> -->
+<!-- 								</p:repeat> -->
+							</p:fieldset>
+						</div>
+						
+					</div>
+				</div>
+
+
+			</h:form>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

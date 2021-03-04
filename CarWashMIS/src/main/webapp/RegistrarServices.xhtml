@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/servicetemplate.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:messages showDetail="true" closable="true" autoUpdate="true" />
+			<div class="ui-g">
+				<div class="ui-g-10">
+					<div class="card">
+						<p:breadCrumb>
+							<p:menuitem outcome="RegistrarServices" />
+							<p:menuitem value="Select Services for Registration" />
+						</p:breadCrumb>
+						
+						<div style="padding-top: 40px; text-align: center;">
+						<p:selectOneMenu style="width:50%;"
+							value="#{carWashServiceController.serviceSelection}">
+							<f:selectItem itemLabel="Choose Services"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Car Wash Services"
+								itemValue="Car Wash Services" />
+							<f:selectItem itemLabel="Parking Services"
+								itemValue="Parking Services" />
+							<p:ajax update="service" />
+						</p:selectOneMenu>
+						</div>
+					</div>
+					<h:panelGroup id="service">
+						<h:panelGroup
+							rendered="#{carWashServiceController.serviceSelection =='Car Wash Services'}">
+							<div class="card">
+								<h1>Car Wash Service Registration</h1>
+								<p:panelGrid columns="2" layout="grid"
+									styleClass="ui-panelgrid-blank form-group"
+									style="padding:20px;">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText style="width:95%;" value="#{carWashServiceController.carWashService.carCategory}" 
+										required="true" requiredMessage="car category is empty"/>
+										<label>Car Category</label>
+									</h:panelGroup>
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputNumber style="width:100%;" value="#{carWashServiceController.carWashService.prices}" 
+										required="true" requiredMessage="service price is empty"/>
+										<label>Serice Prices</label>
+									</h:panelGroup>
+								</p:panelGrid>
+								<p:commandButton value="Save Car wash Serice" icon="fa fa-save" action="#{carWashServiceController.saveCarwashService()}"
+									style="display:inline-block;margin-top:5px" update="form" />
+							</div>
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{carWashServiceController.serviceSelection =='Parking Services'}">
+							<div class="card">
+								<h1>Parking Service Registration</h1>
+								<p:panelGrid columns="2" layout="grid"
+									styleClass="ui-panelgrid-blank form-group"
+									style="padding:20px;">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputNumber style="width:95%;" value="#{carWashServiceController.parkingService.timeDuration}"
+										required="true" requiredMessage="duration time is empty"/>
+										<label>Duration Time Per Minute</label>
+									</h:panelGroup>
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputNumber style="width:100%;" value="#{carWashServiceController.parkingService.price}"
+										required="true" requiredMessage="service price is empty"/>
+										<label>Serice Prices</label>
+									</h:panelGroup>
+								</p:panelGrid>
+								<p:commandButton value="Save Parking Service" icon="fa fa-save" action="#{carWashServiceController.saveParkingService()}"
+									style="display:inline-block;margin-top:5px" update="form" />
+							</div>
+						</h:panelGroup>
+					</h:panelGroup>
+
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

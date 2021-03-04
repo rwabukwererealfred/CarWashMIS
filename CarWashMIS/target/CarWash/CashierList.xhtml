@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+    <h:form>
+    
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h1>Cashier List</h1>
+                    <p:dataTable var="iki" value="#{listController.cashierList()}"
+									
+									style="margin-top:20px;" paginator="true" rows="10">
+
+									<p:column style="width:30px;" headerText="No">
+										#{i=i+1}
+									</p:column>
+									<p:column headerText="First Name">
+									#{iki.firstName}
+							</p:column>
+									<p:column headerText="Last Name">
+									#{iki.lastName}
+							</p:column>
+									<p:column headerText="Phone Number">
+									#{iki.phoneNumber}
+							</p:column>
+									<p:column headerText="Option">
+									<center>
+										<p:commandButton icon="fa fa-pencil"/>
+										<p:commandButton icon="fa fa-trash" styleClass="pink-btn flat"/>
+									</center>
+							</p:column>
+									
+								</p:dataTable>
+                </div>
+            </div>
+        </div>
+       </h:form> 
+    </ui:define>
+
+</ui:composition>

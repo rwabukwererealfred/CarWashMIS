@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+		<p:messages showDetail="true" autoUpdate="true" closable="true"/>
+			<div class="ui-g">
+				<div class="ui-g-8">
+					<div class="card">
+						<h1>Car wash Worker Group</h1>
+						<p:commandButton value="New Work Group" icon="ui-icon-plus"
+							style="float:left;" oncomplete="PF('new').show()" />
+						<br />
+						<p:dataTable var="iki"
+							value="#{listController.workerGroupList()}" id="tab"
+							style="margin-top:20px;" paginator="true" rows="10">
+
+							<p:column headerText="No" style="width:30px;">
+		      #{i=i+1}
+		      </p:column>
+							<p:column headerText="Names">
+							<center>
+									#{iki.name}
+									</center>
+							</p:column>
+							
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<h:form>
+			<p:dialog showEffect="clip" hideEffect="clip" closable="true"
+				modal="true" widgetVar="new" width="400">
+				<p:fieldset legend="Worker group name">
+					<p:inputText style="width:98%;" value="#{registrationController.workerGroup.name}" required="true" requiredMessage="work group name is empty"/>
+				</p:fieldset>
+				<f:facet name="footer">
+					<p:commandButton value="Save" icon="fa fa-save" update="form"
+						oncomplete="PF('new').hide()" actionListener="#{registrationController.saveWorkerGroup()}"/>
+				</f:facet>
+			</p:dialog>
+			
+		</h:form>
+		
+
+	</ui:define>
+
+</ui:composition>

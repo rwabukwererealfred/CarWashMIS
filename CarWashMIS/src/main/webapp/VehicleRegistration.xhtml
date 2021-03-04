@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+    <h:form id="form">
+    <p:messages showDetail="true" autoUpdate="true" closable="true"/>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h1>New Vehicle registration</h1>
+                    <p:panelGrid columns="2" layout="grid"
+									styleClass="ui-panelgrid-blank form-group"
+									style="padding:20px;">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText style="width:95%;" value="#{carWashServiceController.vehicle.plateNo}"/>
+										<label>Plate No</label>
+									</h:panelGroup>
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputText style="width:100%;" value="#{carWashServiceController.vehicle.driverName}"/>
+										<label>Driver Name</label>
+									</h:panelGroup>
+									<h:panelGroup styleClass="md-inputfield">
+										<p:inputMask mask="999 9999 999" style="width:95%;" value="#{carWashServiceController.vehicle.phoneNumber}"/>
+										<label>Driver Phone Number</label>
+									</h:panelGroup>
+<!-- 									<p:selectOneMenu value="#{carWashServiceController.workerGroupId}" required="true" requiredMessage="Worker Group is empty"> -->
+<!-- 									<f:selectItem itemLabel="Choose Worker Group" -->
+<!-- 										noSelectionOption="true" /> -->
+<!-- 									<f:selectItems value="#{listController.workerGroupList()}" var="work" -->
+<!-- 										itemLabel="#{work.name}" itemValue="#{work.workerGroupId}" /> -->
+<!-- 						</p:selectOneMenu> -->
+						<p:selectOneMenu value="#{carWashServiceController.carWashServiceId}" required="true" requiredMessage="car category is empty">
+									<f:selectItem itemLabel="Choose car Category"
+										noSelectionOption="true" />
+									<f:selectItems value="#{listController.carwashList()}" var="work"
+										itemLabel="#{work.carCategory}" itemValue="#{work.id}" />
+						</p:selectOneMenu>
+								</p:panelGrid>
+								<p:commandButton value="Save new Vehicle" icon="fa fa-save" action="#{carWashServiceController.saveVehicle()}"
+									style="display:inline-block;margin-top:5px" update="form" />
+                </div>
+            </div>
+        </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

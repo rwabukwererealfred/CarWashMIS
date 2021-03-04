@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form">
+		<p:messages showDetail="true" autoUpdate="true" closable="true"/>
+			<div class="ui-g">
+				<div class="ui-g-8">
+					<div class="card">
+						<h1>Car wash Wokers</h1>
+						<p:commandButton value="New Worker" icon="ui-icon-plus"
+							style="float:left;" oncomplete="PF('new').show()" />
+						<br />
+						<p:dataTable var="iki"
+							value="#{listController.workerList()}" id="tab"
+							style="margin-top:20px;" paginator="true" rows="10">
+
+							<p:column headerText="No" style="width:30px;">
+		      #{i=i+1}
+		      </p:column>
+							<p:column headerText="Names">
+									#{iki.firstName} #{iki.lastName}
+							</p:column>
+							<p:column headerText="Phone Number">
+									#{iki.phoneNumber}
+							</p:column>
+							
+							<p:column headerText="National Id">
+									#{iki.natinalId}
+							</p:column>
+							<p:column headerText="Group">
+									#{iki.workGroup.name}
+							</p:column>
+							<p:column style="width:80px;" headerText="Option">
+								<center>
+								<p:commandButton icon="fa fa-edit"/>
+								</center>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+		<h:form>
+		<p:dialog widgetVar="new" showEffect="clip" hideEffect="clip"
+				closable="true" closeOnEscape="true" modal="true">
+				<p:panel>
+
+					<p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank form-group" style="padding:20px;">
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{registrationController.worker.firstName}"
+							style="width:95%;" required="true" requiredMessage="first name is empty"/>
+							<label>firstname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{registrationController.worker.lastName}"
+								style="width:95%;" required="true" requiredMessage="last name is empty"/>
+							<label>lastname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield" style="margin-top:10px;">
+							<p:inputMask mask="999 9999 999" value="#{registrationController.worker.phoneNumber}"
+								style="width:95%;" required="true" requiredMessage="phone number is empty"/>
+							<label>phone number</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield" style="margin-top:10px;">
+							<p:inputMask mask="9 9999 999 99 999999" value="#{registrationController.worker.natinalId}"
+								style="width:95%;" required="true" requiredMessage="natinal id is empty"/>
+							<label>National Id</label>
+						</h:panelGroup>
+						<p:selectOneMenu value="#{registrationController.workeGroupId}"
+									id="distr" required="true" requiredMessage="group name is empty">
+									<f:selectItem itemLabel="Choose Worker Group"
+										noSelectionOption="true" />
+									<f:selectItems value="#{listController.workerGroupList()}" var="work"
+										itemLabel="#{work.name}" itemValue="#{work.workerGroupId}" />
+						</p:selectOneMenu>
+						
+					</p:panelGrid>
+					<f:facet name="footer">
+					<p:commandButton value="Save" icon="fa fa-save" update="form" 
+						oncomplete="PF('new').hide()" actionListener="#{registrationController.saveWorker()}"/>
+				</f:facet>
+				</p:panel>
+			</p:dialog>
+			
+		</h:form>
+		<h:form>
+		
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

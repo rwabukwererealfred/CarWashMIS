@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>CAR WASH MIS</title>
+        <h:outputScript name="js/ripple.js" library="ultima-layout" />
+        <h:outputScript name="js/layout.js" library="ultima-layout" />
+    </h:head>
+
+    <h:body styleClass="login-body" style="background-image:linear-gradient(rgba(255,255,255,0),
+    rgba(255,255,255,0.3)), url('./resources/demo/carwash/back.jpg'); ">
+    <h:form id="form">
+    <p:growl showDetail="true" autoUpdate="true"/>
+        <div class="card login-panel ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <img src="resources/demo/carwash/log.JPG" width="100" height="80"/>
+                </div>
+                <div class="ui-g-12">
+                    <h:panelGroup styleClass="md-inputfield">
+                        <p:inputText value="#{authenticationController.username}"/>
+                        <label>Username</label>
+                    </h:panelGroup>
+                </div>
+                <div class="ui-g-12">
+                    <h:panelGroup styleClass="md-inputfield">
+                        <p:password value="#{authenticationController.password}"/>
+                        <label>Password</label>
+                    </h:panelGroup>
+                </div>
+                <div class="ui-g-12">
+                    <p:commandButton  value="Sign In" icon="ui-icon-person" action="#{authenticationController.login()}" />
+                    <p:commandButton  value="Create account" icon="ui-icon-help" styleClass="secondary" oncomplete="PF('acc').show()"
+                    update="@widgetVar(acc)" />
+                </div>
+            </div>
+        </div>
+        </h:form>
+        <h:form>
+        <p:dialog widgetVar="acc" showEffect="clip"
+			hideEffect="clip" width="600" modal="true"
+			header="Fill all Information About new Account">
+
+			<p:fieldset legend="Fill Required Info">
+				<p:panel toggleable="true" closable="true">
+					<h4 style="text-align: center; font-weight: bold;">Create New
+						Account</h4>
+
+					<p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank form-group" style="padding:20px;">
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{authenticationController.user.phoneNumber}" />
+							<label>Phone Number</label>
+						</h:panelGroup>
+
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{authenticationController.user.username}" />
+							<label>Username</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:password value="#{authenticationController.user.password}" />
+							<label>Password</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:password value="#{authenticationController.repassword}" />
+							<label>Retype-password</label>
+						</h:panelGroup>
+
+
+					</p:panelGrid>
+					<p:commandButton
+						action="#{authenticationController.createAccount()}"
+						value="Register" icon="ui-icon-check" styleClass="cyan-btn"
+						style="float:right; margin-right:20px;" update="form"
+						onclick="PF('acc').close()" />
+
+				</p:panel>
+			</p:fieldset>
+
+		</p:dialog>
+        </h:form>
+        
+        <div class="login-footer">CAR WASH MIS</div>
+        
+        <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
+    </h:body>
+
+</html>

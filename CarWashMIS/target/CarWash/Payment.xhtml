@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+    <h:form>
+    <p:breadCrumb>
+							<p:menuitem outcome="Payment" />
+							<p:menuitem value="Payment Details" />
+						</p:breadCrumb>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                   
+                    <p:panelGrid columns="3"
+									styleClass="ui-panelgrid-blank form-group"
+									style="padding:20px;">
+									<h:panelGroup styleClass="md-inputfield">
+										<p:calendar style="width:95%;" pattern="dd/MM/yyyy" value="#{reportController.from}"/>
+										<label>Date FROM</label>
+									</h:panelGroup>
+									<h:panelGroup styleClass="md-inputfield">
+										<p:calendar style="width:95%;" pattern="dd/MM/yyyy" value="#{reportController.end}"/>
+										<label>Date END</label>
+									</h:panelGroup>
+									
+									<p:commandButton icon="fa fa-print" action="#{reportController.vehicleListReport()}" ajax="false"/>
+								</p:panelGrid>
+                   <p:dataTable var="iki"
+									value="#{listController.workerPaymentList()}" id="tab1"
+									 paginator="true" rows="10">
+
+									<p:column headerText="Plate Number">
+									#{iki.vehicles.plateNo}
+							</p:column>
+									<p:column headerText="Owner">
+									#{iki.vehicles.driverName}
+							</p:column>
+									<p:column headerText="Driver Phone Number">
+									#{iki.vehicles.phoneNumber}
+							</p:column>
+									<p:column headerText="Car Category">
+									#{iki.vehicles.carWashService.carCategory}
+							</p:column>
+									
+									<p:column headerText="Car Wash Price">
+										<center>#{iki.vehicles.carWashService.prices} Rwf</center>
+									</p:column>
+									<p:column headerText="Parking Price">
+										<center>#{iki.vehicles.totalAmount - iki.vehicles.carWashService.prices} Rwf</center>
+									</p:column>
+									<p:column headerText="Total Price">
+										<center>#{iki.vehicles.totalAmount} Rwf</center>
+									</p:column>
+									<p:column headerText="Group Paid Amount">
+										<center>#{iki.amount} Rwf</center>
+									</p:column>
+								</p:dataTable>
+                </div>
+            </div>
+        </div>
+       </h:form> 
+    </ui:define>
+
+</ui:composition>

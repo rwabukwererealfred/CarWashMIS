@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+    <h:form id="form">
+    <p:messages showDetail="true" autoUpdate="true" closable="true"/>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h1>Cashier Registration</h1>
+                    <p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank form-group" style="padding:20px;">
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{registrationController.user.firstName}"
+								style="width:95%;" required="true" requiredMessage="first name is empty"/>
+							<label>firstname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield">
+							<p:inputText value="#{registrationController.user.lastName}"
+								style="width:95%;" required="true" requiredMessage="last name is empty"/>
+							<label>lastname</label>
+						</h:panelGroup>
+						<h:panelGroup styleClass="md-inputfield" style="margin-top:10px;">
+							<p:inputMask mask="999 9999 999" value="#{registrationController.user.phoneNumber}"
+								style="width:95%;" required="true" requiredMessage="phone number is empty"/>
+							<label>phone number</label>
+						</h:panelGroup>
+						
+					</p:panelGrid>
+					<p:commandButton value="record" action="#{registrationController.saveCashier()}" icon="fa fa-save" 
+							 update="form"/>
+                </div>
+            </div>
+        </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
